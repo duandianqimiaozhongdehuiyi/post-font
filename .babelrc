@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        // 转化vue里面的jsx代码,因为vue和react支持的jsx有一定的区别
+        "transform-vue-jsx"
+    ]
+}

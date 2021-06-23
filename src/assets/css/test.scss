@@ -1,0 +1,43 @@
+$spacer: 8px;
+$spacers: map-merge($map1: (
+  0: 0,
+  1: 1 * $spacer,
+  2: 2 * $spacer,
+  3: 3 * $spacer,
+  4: 4 * $spacer,
+  5: 5 * $spacer
+), $map2: $spacers);
+$utils: map-merge($map1: (
+  m: (
+    property: margin,
+    values: $spacers
+  ),
+  mx: (
+    property: margin-left margin-right,
+    values: $spacers
+  ),
+  p: (
+    property: padding,
+    values: $spacers
+  ),
+  px: (
+    property: padding-left padding-right,
+    values: $spacers
+  )
+), $map2: $utils);
+@each $key, $value in $utils {
+  // 取utils的步进长度，循环的数据
+  // 确定了循环的长度
+  $values: map-get($map: $value, $key: values);
+  // 取多个元素的样式进行遍历
+  $properties: map-get($map: $value, $key: property);
+  // 循环产生不同的spacer对应的样式
+  @each $item-key, $item-value in $values {
+    // .px-{spacer-item} {padding-left: spacer-value !important!}
+    .#{key}-#{$item-key} {
+      @each $property in $properties {
+        #{$property}: $item-value !important;
+      }
+    }
+  }
+}
